@@ -1,4 +1,3 @@
-
 import requests
 from flask import Flask, request
 
@@ -20,13 +19,10 @@ def home():
 def signal():
     data = request.json
 
-    pattern = data.get("pattern")
-
-    if pattern == "Hammer":
-        send_signal("📈 BUY SIGNAL — Hammer pattern detected!")
-
-    elif pattern == "Pin Bar":
-        send_signal("📉 SELL SIGNAL — Pin Bar detected!")
+    if data.get("type") == "buy":
+        send_signal("📈 BUY SIGNAL — Candle Pattern Confirmed!")
+    elif data.get("type") == "sell":
+        send_signal("📉 SELL SIGNAL — Candle Pattern Confirmed!")
 
     return {"status": "sent"}
 
