@@ -3,7 +3,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-BOT_TOKEN = "8344375747:AAGmzyhg1r8Q0BRjtzojjs2298nWwTgzBcA"
+BOT_TOKEN = "8344375747:AAG8I4F85cZyKq2Rbfivsi8Ad7LUwAi-dY8"
 CHAT_ID = "8089370993"
 
 def send_signal(message):
