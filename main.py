@@ -15,14 +15,22 @@ def send_signal(message):
 def home():
     return "Pocket Option Signal Bot Running!"
 
-@app.route('/signal', methods=['POST'])
+@app.route('/signal', methods=['GET', 'POST'])
 def signal():
-    data = request.json
+    # GET request (from browser)
+    signal_type = request.args.get("type")
 
-    if data.get("type") == "buy":
+    # POST request (from bot or MT5)
+    if request.method == "POST":
+        data = request.json
+        signal_type = data.get("type")
+
+    if signal_type == "buy":
         send_signal("📈 BUY SIGNAL — Candle Pattern Confirmed!")
-    elif data.get("type") == "sell":
+    elif signal_type == "sell":
         send_signal("📉 SELL SIGNAL — Candle Pattern Confirmed!")
+    else:
+        return {"status": "error", "message": "No signal type provided"}
 
     return {"status": "sent"}
 
